@@ -3,6 +3,7 @@ A simple docker container for hosting websites using apache and php, when used i
 
 ## Supported tags and respective `Dockerfile` links:
 -	`8.0-apache`
+-	`8.1-apache`
 
 ## Volumes:
 
