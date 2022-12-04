@@ -2,7 +2,7 @@
 A simple docker container for hosting websites using apache and php, when used in a production environment a proxy is advised.
 
 ## Supported tags and respective `Dockerfile` links:
--	`'ToDo`
+-	`8.0-apache`
 
 ## Volumes:
 
