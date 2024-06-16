@@ -3,31 +3,30 @@
 # Set variables
 
 servername=${HOSTING_DOMAINNAME//./_}
-mkdir /var/www/html/$servername
 
-cat > /etc/apache/sites/$servername.conf << EOF
+mkdir /var/www/html/$(servername)
+
+cat /etc/apache/sites/$(echo $servername) << EOF
 <VirtualHost *:80>
-        ServerName www.<domainname>
+        ServerName www.$(echo $HOSTING_DOMAINNAME)
 
-        ServerAdmin <domainadmin>
+        ServerAdmin $(echo $HOSTING_SERVERADMIN)
 
-        Redirect 301 / http://<domainname>/
+        Redirect 301 / http://$(echo $HOSTING_DOMAINNAME)/
 
-        ErrorLog /var/www/logs/error-www_<domainnamefolder>.log
-        CustomLog ${APACHE_LOG_DIR}/access-www_<domainnamefolder>.log combined
+        ErrorLog /var/www/logs/error-www_$(echo $servername).log
+        CustomLog ${APACHE_LOG_DIR}/access-www_$(echo $servername).log combined
 </VirtualHost>
 
 <VirtualHost *:80>
-        ServerName <domainname>
+        ServerName $(echo $HOSTING_DOMAINNAME)
 
-        ServerAdmin <domainadmin>
+        ServerAdmin $(echo $HOSTING_SERVERADMIN)
 
-		DocumentRoot /var/www/html/<domainnamefolder>
+		DocumentRoot /var/www/html/$(echo $servername)
 
 
-        ErrorLog /var/www/logs/error-<domainnamefolder>.log
-        CustomLog ${APACHE_LOG_DIR}/access-<domainnamefolder>.log combined
+        ErrorLog /var/www/logs/error-$(echo $servername).log
+        CustomLog ${APACHE_LOG_DIR}/access-$(echo $servername).log combined
 </VirtualHost>
 EOF
-
-echo "Done"
