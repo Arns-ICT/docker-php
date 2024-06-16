@@ -38,4 +38,4 @@ RUN apt clean
 COPY files/init.sh /bin
 RUN chmod +x /bin/init.sh
 
-ENTRYPOINT "bin/init.sh"
+CMD ["/bin/init.sh"]
