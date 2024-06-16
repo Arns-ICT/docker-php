@@ -18,6 +18,7 @@ RUN sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/apache2.conf
 RUN sed -i 's|ServerTokens OS|ServerTokens Prod|g' /etc/apache2/conf-enabled/security.conf
 RUN sed -i 's|ServerSignature On|ServerSignature Off|g' /etc/apache2/conf-enabled/security.conf
 
+RUN rm -rf /etc/apache2/sites-enabled/* && rm -rf /etc/apache2/sites-available/*
 COPY files/template_vhost.conf /etc/apache2/sites-available/
 
 # Configure PHP
