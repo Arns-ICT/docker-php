@@ -35,7 +35,7 @@ RUN sed -i 's|;upload_tmp_dir =|upload_tmp_dir = /tmp|g' $PHP_INI_DIR/php.ini
 RUN apt clean
 
 # add init script
-COPY files/init.sh /root
-RUN chmod +x /root/init.sh
+COPY files/init.sh /bin
+RUN chmod +x /bin/init.sh
 
-CMD ["/root/init.sh"]
+ENTRYPOINT "bin/init.sh && apache2-foreground"
