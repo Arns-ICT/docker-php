@@ -30,3 +30,6 @@ cat > /etc/apache/sites/$(echo $servername).conf << EOF
         CustomLog ${APACHE_LOG_DIR}/access-$(echo $servername).log combined
 </VirtualHost>
 EOF
+
+# Start apache
+apache2-foreground
