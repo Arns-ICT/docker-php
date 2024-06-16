@@ -7,15 +7,20 @@ RUN apt update && apt full-upgrade -y
 RUN  --mount=type=bind,from=mlocati/php-extension-installer:latest,source=/usr/bin/install-php-extensions,target=/usr/local/bin/install-php-extensions \
       install-php-extensions bcmath exif gd imagick intl mysqli pdo_mysql sockets ssh2 zip
 
+
 # Configure Apache
 RUN a2enmod deflate
 RUN a2enmod rewrite
 
-RUN sed -i 's|        Options Indexes FollowSymLinks|        Options FollowSymLinks|g' /etc/apache2/apache2.conf
-RUN sed -i 's|        AllowOverride None|        AllowOverride All|g' /etc/apache2/apache2.conf
+RUN sed -i 's|Options Indexes FollowSymLinks|Options FollowSymLinks|g' /etc/apache2/apache2.conf
+RUN sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/apache2.conf
 
 RUN sed -i 's|ServerTokens OS|ServerTokens Prod|g' /etc/apache2/conf-enabled/security.conf
 RUN sed -i 's|ServerSignature On|ServerSignature Off|g' /etc/apache2/conf-enabled/security.conf
+
+RUN sed -i 's|sites-enabled|sites|g' /etc/apache2/apache2.conf
+RUN rm -rf /etc/apache2/sites-* && mkdir /etc/apache2/sites
+
 
 # Configure PHP
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
