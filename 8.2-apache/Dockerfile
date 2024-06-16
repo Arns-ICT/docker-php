@@ -36,5 +36,6 @@ RUN apt clean
 
 # add init script
 COPY files/init.sh /root
+RUN chmod +x /root/init.sh
 
 CMD ["/root/init.sh"]

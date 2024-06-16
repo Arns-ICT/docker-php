@@ -4,7 +4,7 @@
 
 servername=${HOSTING_DOMAINNAME//./_}
 
-mkdir /var/www/html/${echo servername}
+mkdir /var/www/html/$(echo $servername)
 
 cat /etc/apache/sites/$(echo $servername).conf << EOF
 <VirtualHost *:80>
