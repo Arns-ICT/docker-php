@@ -18,9 +18,7 @@ RUN sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/apache2.conf
 RUN sed -i 's|ServerTokens OS|ServerTokens Prod|g' /etc/apache2/conf-enabled/security.conf
 RUN sed -i 's|ServerSignature On|ServerSignature Off|g' /etc/apache2/conf-enabled/security.conf
 
-RUN sed -i 's|sites-enabled|sites|g' /etc/apache2/apache2.conf
-RUN rm -rf /etc/apache2/sites-* && mkdir /etc/apache2/sites
-
+COPY files/template_vhost.conf /etc/apache2/sites-available/
 
 # Configure PHP
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
