@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.4-apache
 
 # Install latest updates
 RUN apt update && apt full-upgrade -y
